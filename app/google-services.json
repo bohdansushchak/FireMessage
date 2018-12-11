@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "369834033800",
+    "firebase_url": "https://firemessage-1235.firebaseio.com",
+    "project_id": "firemessage-1235",
+    "storage_bucket": "firemessage-1235.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369834033800:android:62c68d1e3a7ecc14",
+        "android_client_info": {
+          "package_name": "com.sushchak.bohdan.firemessage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "369834033800-76j5t4hlmhvu33mgop5a1jovbap2ghnm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCn-cZsuNIoDW7dAZqjQnyaxF42Y6mpuzU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
