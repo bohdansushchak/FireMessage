@@ -43,13 +43,17 @@ dependencies {
     implementation "org.jetbrains.anko:anko-coroutines:$anko_version"
 
     //firebase
-    //noinspection GradleDependency
     implementation 'com.google.firebase:firebase-core:11.8.0'
-    //noinspection GradleDependency
     implementation 'com.google.firebase:firebase-firestore:11.8.0'
-    //noinspection GradleDependency
     implementation 'com.google.firebase:firebase-auth:11.8.0'
     implementation 'com.firebaseui:firebase-ui-auth:3.2.2'
+    implementation 'com.google.firebase:firebase-storage:11.8.0'
+    implementation 'com.firebaseui:firebase-ui-storage:3.2.2'
+
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+
+    kapt 'com.github.bumptech.glide:compiler:4.8.0'
 
     apply plugin: 'com.google.gms.google-services'
 

@@ -1,8 +1,9 @@
-package com.sushchak.bohdan.firemessage
+package com.sushchak.bohdan.firemessage.ui
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
+import com.sushchak.bohdan.firemessage.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
