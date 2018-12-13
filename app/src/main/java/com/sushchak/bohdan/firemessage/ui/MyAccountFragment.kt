@@ -45,32 +45,33 @@ class MyAccountFragment : Fragment() {
                 }
 
                 startActivityForResult(Intent.createChooser(intent, "Select image"), RC_SELECT_IMAGE)
-
-                btn_save.setOnClickListener {
-                    if (::selectedImageBytes.isInitialized)
-                        StorageUtil.uploadProfilePhoto(selectedImageBytes) { imagePath ->
-                            FirestoreUtil.updateCurrentUser(
-                                editText_name.text.toString(),
-                                editText_bio.text.toString(),
-                                imagePath
-                            )
-                        }
-                    else
+            }
+            btn_save.setOnClickListener {
+                if (::selectedImageBytes.isInitialized)
+                    StorageUtil.uploadProfilePhoto(selectedImageBytes) { imagePath ->
                         FirestoreUtil.updateCurrentUser(
                             editText_name.text.toString(),
                             editText_bio.text.toString(),
-                            null)
+                            imagePath
+                        )
+                    }
+                else
+                    FirestoreUtil.updateCurrentUser(
+                        editText_name.text.toString(),
+                        editText_bio.text.toString(),
+                        null
+                    )
 
-                }
-
-                btn_sign_out.setOnClickListener {
-                    AuthUI.getInstance()
-                        .signOut(this@MyAccountFragment.context!!)
-                        .addOnCompleteListener {
-                            startActivity(intentFor<SignInActivity>().newTask().clearTask())
-                        }
-                }
             }
+
+            btn_sign_out.setOnClickListener {
+                AuthUI.getInstance()
+                    .signOut(this@MyAccountFragment.context!!)
+                    .addOnCompleteListener {
+                        startActivity(intentFor<SignInActivity>().newTask().clearTask())
+                    }
+            }
+
         }
 
         return view
@@ -101,11 +102,11 @@ class MyAccountFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         FirestoreUtil.getCurrentUser { user ->
-            if(this@MyAccountFragment.isVisible){
+            if (this@MyAccountFragment.isVisible) {
                 editText_name.setText(user.name)
                 editText_bio.setText(user.bio)
 
-                if(!pictureJustChanged && user.profilePicturePath != null)
+                if (!pictureJustChanged && user.profilePicturePath != null)
                     GlideApp.with(this)
                         .load(StorageUtil.pathToReference(user.profilePicturePath))
                         .placeholder(R.drawable.ic_account)

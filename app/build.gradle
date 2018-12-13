@@ -47,21 +47,30 @@ dependencies {
     implementation "org.jetbrains.anko:anko-coroutines:$anko_version"
 
     //firebase
-    implementation 'com.google.firebase:firebase-core:11.8.0'
-    implementation 'com.google.firebase:firebase-firestore:11.8.0'
-    implementation 'com.google.firebase:firebase-auth:11.8.0'
+    implementation 'com.google.firebase:firebase-core:12.0.0'
+    implementation 'com.google.firebase:firebase-firestore:12.0.0'
+    implementation 'com.google.firebase:firebase-auth:12.0.0'
     implementation 'com.firebaseui:firebase-ui-auth:3.2.2'
-    implementation 'com.google.firebase:firebase-storage:11.8.0'
+    implementation 'com.google.firebase:firebase-storage:12.0.0'
     implementation 'com.firebaseui:firebase-ui-storage:3.2.2'
+    implementation 'com.google.android.gms:play-services-auth:12.0.0'
 
     //glide
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
 
+    //groupie
+    implementation 'com.xwray:groupie:2.0.3'
+    implementation 'com.xwray:groupie-kotlin-android-extensions:2.0.3'
+
     kotlin {
         experimental {
             coroutines "enable"
         }
+    }
+
+    androidExtensions {
+        experimental = true
     }
 
 }
