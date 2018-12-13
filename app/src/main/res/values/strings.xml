@@ -14,4 +14,7 @@
     <string name="dialog_error_msg_no_internet">No internet</string>
     <string name="dialog_error_msg_unknown_error">Unknown error</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

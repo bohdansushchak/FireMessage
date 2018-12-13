@@ -3,8 +3,6 @@ package com.sushchak.bohdan.firemessage.ui
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
-import com.sushchak.bohdan.firemessage.ui.MainActivity
-import com.sushchak.bohdan.firemessage.ui.SignInActivity
 import org.jetbrains.anko.startActivity
 
 class SplashActivity : AppCompatActivity() {
