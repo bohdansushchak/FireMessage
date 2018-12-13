@@ -71,7 +71,6 @@ class MyAccountFragment : Fragment() {
                         startActivity(intentFor<SignInActivity>().newTask().clearTask())
                     }
             }
-
         }
 
         return view

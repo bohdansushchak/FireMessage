@@ -26,7 +26,12 @@
         <activity
                 android:name=".ui.SignInActivity"
                 android:label="Start firing messages"/>
-        <activity android:name=".ui.PeopleFragment">
+
+        <activity android:name=".ui.ChatActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.MainActivity"
+                />
         </activity>
     </application>
 
