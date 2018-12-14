@@ -27,7 +27,7 @@ object FirestoreUtil {
         currentUserDocRef.get().addOnSuccessListener { documentSnapshot ->
             if (!documentSnapshot.exists()) {
                 val newUser = User(FirebaseAuth.getInstance().currentUser?.displayName ?: "",
-                    "", null)//, mutableListOf())
+                    "", null, mutableListOf())
                 currentUserDocRef.set(newUser).addOnSuccessListener {
                     onComplete()
                 }
@@ -128,11 +128,11 @@ object FirestoreUtil {
             .add(message)
     }
 
-    //region FCM
+     //region FCM
     fun getFCMRegistrationTokens(onComplete: (tokens: MutableList<String>) -> Unit) {
         currentUserDocRef.get().addOnSuccessListener {
             val user = it.toObject(User::class.java)!!
-            //onComplete(user.registrationTokens)
+            onComplete(user.registrationTokens)
         }
     }
 
