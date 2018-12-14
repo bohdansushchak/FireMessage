@@ -7,6 +7,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.sushchak.bohdan.firemessage.model.*
+import com.sushchak.bohdan.firemessage.recyclerview.item.ImageMessageItem
 import com.sushchak.bohdan.firemessage.recyclerview.item.PersonItem
 import com.sushchak.bohdan.firemessage.recyclerview.item.TextMessageItem
 
@@ -114,8 +115,7 @@ object FirestoreUtil {
                     if (it["type"] == MessageType.TEXT)
                         items.add(TextMessageItem(it.toObject(TextMessage::class.java)!!, context))
                     else
-                        TODO("sein dsf")
-                       // items.add(ImageMessageItem(it.toObject(ImageMessage::class.java)!!, context))
+                        items.add(ImageMessageItem(it.toObject(ImageMessage::class.java)!!, context))
                     return@forEach
                 }
                 onListen(items)
