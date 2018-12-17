@@ -30,8 +30,11 @@
         <activity android:name=".ui.ChatActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.MainActivity"
-                />
+                    android:value=".ui.MainActivity"/>
+            <intent-filter>
+                <action android:name="ChatActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
         </activity>
 
         <!--FCM-->

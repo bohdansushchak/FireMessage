@@ -10,7 +10,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         if(remoteMessage.notification != null){
 
-            Log.d("FCM", "FCM message received")
+
+            Log.d("FCM", remoteMessage.data.toString())
         }
     }
 }
