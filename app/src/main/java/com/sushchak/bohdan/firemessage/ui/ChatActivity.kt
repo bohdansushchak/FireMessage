@@ -25,7 +25,6 @@ import java.io.ByteArrayOutputStream
 import java.util.*
 import android.view.View
 
-
 class ChatActivity : AppCompatActivity() {
 
     private val RC_SELECT_IMAGE = 2
@@ -37,7 +36,6 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var messageListenerRegistration: ListenerRegistration
     private var shouldInitRecyclerView = true
     private lateinit var messagesSection: Section
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

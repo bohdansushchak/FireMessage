@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         replaceFragment(PeopleFragment())
-
+        supportActionBar?.title = "Contacts"
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 
@@ -23,12 +23,14 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_people -> {
 
                 replaceFragment(PeopleFragment())
+                supportActionBar?.title = "Contacts"
                 return@OnNavigationItemSelectedListener true
             }
 
             R.id.navigation_my_account -> {
 
                 replaceFragment(MyAccountFragment())
+                supportActionBar?.title = "Account"
                 return@OnNavigationItemSelectedListener true
             }
 
