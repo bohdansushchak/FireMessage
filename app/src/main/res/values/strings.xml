@@ -14,7 +14,16 @@
     <string name="dialog_error_msg_no_internet">No internet</string>
     <string name="dialog_error_msg_unknown_error">Unknown error</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- content description -->
+    <string name="iv_account_image">Account image</string>
+
+    <!-- account fragment views-->
+    <string name="ed_hint_my_name">My name</string>
+    <string name="ed_hint_my_bio">My bio</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_sing_out">Sing out</string>
+
+    <!-- chat activity -->
+    <string name="ed_hint_enter_message">Enter your message</string>
 
 </resources>

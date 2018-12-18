@@ -44,6 +44,9 @@ class ChatActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = intent.getStringExtra(AppConstants.USER_NAME)
 
+
+
+
         FirestoreUtil.getCurrentUser {
             currentUser = it
         }

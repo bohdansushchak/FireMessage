@@ -61,7 +61,6 @@ class MyAccountFragment : Fragment() {
                         editText_bio.text.toString(),
                         null
                     )
-
             }
 
             btn_sign_out.setOnClickListener {
@@ -92,7 +91,9 @@ class MyAccountFragment : Fragment() {
 
             GlideApp.with(this)
                 .load(selectedImageBytes)
+                .placeholder(R.drawable.image_account)
                 .into(imageView_profile_picture)
+
 
             pictureJustChanged = true
         }
@@ -108,9 +109,8 @@ class MyAccountFragment : Fragment() {
                 if (!pictureJustChanged && user.profilePicturePath != null)
                     GlideApp.with(this)
                         .load(StorageUtil.pathToReference(user.profilePicturePath))
-                        .placeholder(R.drawable.ic_account)
+                        .placeholder(R.drawable.image_account)
                         .into(imageView_profile_picture)
-
             }
         }
     }

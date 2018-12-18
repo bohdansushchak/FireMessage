@@ -22,5 +22,9 @@ class PersonItem(val person: User,
                 .load(StorageUtil.pathToReference(person.profilePicturePath))
                 .into(viewHolder.imageView_profile_picture)
         }
+        else
+            GlideApp.with(context)
+                .load(R.drawable.image_account)
+                .into(viewHolder.imageView_profile_picture)
     }
 }

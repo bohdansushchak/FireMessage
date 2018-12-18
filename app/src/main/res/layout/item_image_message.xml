@@ -25,7 +25,7 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:paddingTop="4dp"
-                tools:src="@drawable/ic_image_black_24dp" />
+                tools:src="@drawable/ic_image_placeholder" />
 
         <TextView
                 android:id="@+id/textView_message_time"
