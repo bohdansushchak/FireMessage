@@ -3,6 +3,7 @@ package com.sushchak.bohdan.firemessage.ui
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Rect
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -11,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ListenerRegistration
 import com.sushchak.bohdan.firemessage.R
 import com.sushchak.bohdan.firemessage.model.ImageMessage
-import com.sushchak.bohdan.firemessage.model.MessageType
 import com.sushchak.bohdan.firemessage.model.TextMessage
 import com.sushchak.bohdan.firemessage.model.User
 import com.sushchak.bohdan.firemessage.utils.FirestoreUtil
@@ -23,6 +23,8 @@ import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.activity_chat.*
 import java.io.ByteArrayOutputStream
 import java.util.*
+import android.view.View
+
 
 class ChatActivity : AppCompatActivity() {
 
@@ -69,7 +71,8 @@ class ChatActivity : AppCompatActivity() {
             }
 
             fab_send_image.setOnClickListener {
-                val intent = Intent().apply{
+
+                val intent = Intent().apply {
                     type = "image/*"
                     action = Intent.ACTION_GET_CONTENT
                     putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/jpeg", "image/png"))
@@ -77,14 +80,24 @@ class ChatActivity : AppCompatActivity() {
                 startActivityForResult(Intent.createChooser(intent, "Select image"), RC_SELECT_IMAGE)
             }
 
-            editText_message.setOnFocusChangeListener { v, hasFocus ->
+            editText_message.viewTreeObserver.addOnGlobalLayoutListener {
 
-                //TODO: add update recycler
-                if(hasFocus) {
-                    recycler_view_messages.scrollToPosition(recycler_view_messages.adapter!!.itemCount - 1)
+                if(keyboardShown(editText_message.rootView)){
+                    scrollToLastMessage()
                 }
             }
+
         }
+    }
+
+    private fun keyboardShown(rootView: View): Boolean {
+
+        val softKeyboardHeight = 100
+        val r = Rect()
+        rootView.getWindowVisibleDisplayFrame(r)
+        val dm = rootView.getResources().getDisplayMetrics()
+        val heightDiff = rootView.getBottom() - r.bottom
+        return heightDiff > softKeyboardHeight * dm.density
     }
 
     private fun updateRecyclerView(messages: List<Item>) {
@@ -106,8 +119,10 @@ class ChatActivity : AppCompatActivity() {
         else
             updateItems()
 
-        recycler_view_messages.scrollToPosition(recycler_view_messages.adapter!!.itemCount - 1)
+        scrollToLastMessage()
     }
+
+    private fun scrollToLastMessage() = recycler_view_messages.scrollToPosition(recycler_view_messages.adapter!!.itemCount - 1)
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == RC_SELECT_IMAGE && resultCode == Activity.RESULT_OK &&

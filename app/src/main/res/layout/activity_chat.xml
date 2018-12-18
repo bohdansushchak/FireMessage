@@ -18,7 +18,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:backgroundTintMode="multiply" android:scaleType="fitXY"
-            android:background="@drawable/chat_background"/>
+            android:background="@drawable/chat_background" android:nestedScrollingEnabled="true"/>
 
     <RelativeLayout
             android:id="@+id/relativeLayout_message"
