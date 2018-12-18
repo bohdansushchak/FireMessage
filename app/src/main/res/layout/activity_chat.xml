@@ -12,13 +12,14 @@
             android:id="@+id/recycler_view_messages"
             android:layout_width="0dp"
             android:layout_height="0dp"
-
             app:layout_constraintBottom_toTopOf="@id/relativeLayout_message"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:backgroundTintMode="multiply" android:scaleType="fitXY"
-            android:background="@drawable/chat_background" android:nestedScrollingEnabled="true"/>
+            android:backgroundTintMode="multiply"
+            android:scaleType="fitXY"
+            android:background="@drawable/chat_background"
+            android:nestedScrollingEnabled="true"/>
 
     <RelativeLayout
             android:id="@+id/relativeLayout_message"
