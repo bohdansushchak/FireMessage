@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MessagingApp</string>
+
+    <!-- navigation bottom bar-->
+    <string name="bot_bar_title_contacts">Контакти</string>
+    <string name="bot_bar_title_account">Аккаунт</string>
+
+    <!-- Dialog alerts -->
+    <string name="dialog_msg_setting_your_account">Настройка вашей учетной записи</string>
+
+    <!-- dialog errors -->
+    <string name="dialog_error_msg_no_internet">Без интернета</string>
+    <string name="dialog_error_msg_unknown_error">Неизвестная ошибка</string>
+
+    <!-- content description -->
+    <string name="iv_account_image">Изображение аккаунта</string>
+
+    <!-- account fragment views-->
+    <string name="ed_hint_my_name">Мое имя</string>
+    <string name="ed_hint_my_bio">Моя биография</string>
+    <string name="btn_save">Сохранить</string>
+    <string name="btn_sing_out">Bыход</string>
+
+    <!-- chat activity -->
+    <string name="ed_hint_enter_message">Введите ваше сообщение</string>
+    <string name="intent_select_image">Выберите изображение</string>
+</resources>

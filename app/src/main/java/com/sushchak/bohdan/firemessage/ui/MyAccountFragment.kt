@@ -47,7 +47,7 @@ class MyAccountFragment : Fragment() {
                     putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/jpeg", "image/png"))
                 }
 
-                startActivityForResult(Intent.createChooser(intent, "Select image"), RC_SELECT_IMAGE)
+                startActivityForResult(Intent.createChooser(intent, getString(R.string.intent_select_image)), RC_SELECT_IMAGE)
             }
             btn_save.setOnClickListener {
                 if (::selectedImageBytes.isInitialized)

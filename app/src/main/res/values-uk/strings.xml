@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MessagingApp</string>
+
+
+    <!-- navigation bottom bar-->
+    <string name="bot_bar_title_contacts">Контакти</string>
+    <string name="bot_bar_title_account">Профіль</string>
+
+    <!-- Dialog alerts -->
+    <string name="dialog_msg_setting_your_account">Налаштуйте свій профіль</string>
+
+
+    <!-- dialog errors -->
+    <string name="dialog_error_msg_no_internet">Немає інтернету</string>
+    <string name="dialog_error_msg_unknown_error">Невідоса помилка</string>
+
+    <!-- content description -->
+    <string name="iv_account_image">Аватарка</string>
+
+    <!-- account fragment views-->
+    <string name="ed_hint_my_name">Ім"'"я</string>
+    <string name="ed_hint_my_bio">Про себе</string>
+    <string name="btn_save">Зберегти</string>
+    <string name="btn_sing_out">Вийти</string>
+
+    <!-- chat activity -->
+    <string name="ed_hint_enter_message">Впишіть повідомлення</string>
+    <string name="intent_select_image">Виберіть фото</string>
+</resources>

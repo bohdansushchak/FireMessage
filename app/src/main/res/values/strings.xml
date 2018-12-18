@@ -1,14 +1,12 @@
 <resources>
     <string name="app_name">MessagingApp</string>
 
-
     <!-- navigation bottom bar-->
     <string name="bot_bar_title_contacts">Contacts</string>
     <string name="bot_bar_title_account">Account</string>
 
     <!-- Dialog alerts -->
     <string name="dialog_msg_setting_your_account">Setting up your account</string>
-
 
     <!-- dialog errors -->
     <string name="dialog_error_msg_no_internet">No internet</string>
@@ -21,9 +19,11 @@
     <string name="ed_hint_my_name">My name</string>
     <string name="ed_hint_my_bio">My bio</string>
     <string name="btn_save">Save</string>
-    <string name="btn_sing_out">Sing out</string>
+    <string name="btn_sing_out">Sign out</string>
 
     <!-- chat activity -->
     <string name="ed_hint_enter_message">Enter your message</string>
+
+    <string name="intent_select_image">Select image</string>
 
 </resources>
