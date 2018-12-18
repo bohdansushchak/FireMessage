@@ -24,6 +24,9 @@ import kotlinx.android.synthetic.main.activity_chat.*
 import java.io.ByteArrayOutputStream
 import java.util.*
 import android.view.View
+import org.jetbrains.anko.clearTask
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.newTask
 
 class ChatActivity : AppCompatActivity() {
 
@@ -44,12 +47,7 @@ class ChatActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = intent.getStringExtra(AppConstants.USER_NAME)
 
-
-
-
-        FirestoreUtil.getCurrentUser {
-            currentUser = it
-        }
+        FirestoreUtil.getCurrentUser(::onSuccessGetUser, ::onFailedGestUser)
 
         otherUserId = intent.getStringExtra(AppConstants.USER_ID)
 
@@ -65,7 +63,8 @@ class ChatActivity : AppCompatActivity() {
                         editText_message.text.toString(), Calendar.getInstance().time,
                         FirebaseAuth.getInstance().currentUser!!.uid,
                         otherUserId,
-                        currentUser.name)
+                        currentUser.name
+                    )
 
                 editText_message.setText("")
                 FirestoreUtil.sendMessage(messageToSend, channelId)
@@ -83,11 +82,10 @@ class ChatActivity : AppCompatActivity() {
 
             editText_message.viewTreeObserver.addOnGlobalLayoutListener {
 
-                if(keyboardShown(editText_message.rootView)){
+                if (keyboardShown(editText_message.rootView)) {
                     scrollToLastMessage()
                 }
             }
-
         }
     }
 
@@ -123,11 +121,13 @@ class ChatActivity : AppCompatActivity() {
         scrollToLastMessage()
     }
 
-    private fun scrollToLastMessage() = recycler_view_messages.scrollToPosition(recycler_view_messages.adapter!!.itemCount - 1)
+    private fun scrollToLastMessage() =
+        recycler_view_messages.scrollToPosition(recycler_view_messages.adapter!!.itemCount - 1)
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(requestCode == RC_SELECT_IMAGE && resultCode == Activity.RESULT_OK &&
-                data != null && data.data != null){
+        if (requestCode == RC_SELECT_IMAGE && resultCode == Activity.RESULT_OK &&
+            data != null && data.data != null
+        ) {
             val selectedImagePath = data.data
 
             val selectedImageBmp = MediaStore.Images.Media.getBitmap(contentResolver, selectedImagePath)
@@ -138,13 +138,24 @@ class ChatActivity : AppCompatActivity() {
             val selecteImageBytes = outputStream.toByteArray()
 
             StorageUtil.uploadMessageImage(selecteImageBytes) { imagePath ->
-                val messageToSend = ImageMessage(imagePath,
+                val messageToSend = ImageMessage(
+                    imagePath,
                     Calendar.getInstance().time,
                     FirebaseAuth.getInstance().currentUser!!.uid, otherUserId,
-                    currentUser.name)
+                    currentUser.name
+                )
 
                 FirestoreUtil.sendMessage(messageToSend, currentChannelId)
             }
         }
+    }
+
+    private fun onSuccessGetUser(user: User) {
+        currentUser = user
+    }
+
+    private fun onFailedGestUser(e: Exception) {
+        FirebaseAuth.getInstance().signOut()
+        startActivity(intentFor<SignInActivity>().newTask().clearTask())
     }
 }

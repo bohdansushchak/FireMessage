@@ -11,9 +11,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.firebase.ui.auth.AuthUI
+import com.google.firebase.auth.FirebaseAuth
 
 import com.sushchak.bohdan.firemessage.R
 import com.sushchak.bohdan.firemessage.glide.GlideApp
+import com.sushchak.bohdan.firemessage.model.User
 import com.sushchak.bohdan.firemessage.utils.FirestoreUtil
 import com.sushchak.bohdan.firemessage.utils.StorageUtil
 import kotlinx.android.synthetic.main.fragment_my_account.*
@@ -22,6 +24,7 @@ import org.jetbrains.anko.clearTask
 import org.jetbrains.anko.newTask
 import org.jetbrains.anko.support.v4.intentFor
 import java.io.ByteArrayOutputStream
+import java.lang.Exception
 
 class MyAccountFragment : Fragment() {
 
@@ -101,17 +104,25 @@ class MyAccountFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        FirestoreUtil.getCurrentUser { user ->
-            if (this@MyAccountFragment.isVisible) {
-                editText_name.setText(user.name)
-                editText_bio.setText(user.bio)
+        FirestoreUtil.getCurrentUser(::successGetUser, ::failsedLoadUser)
+    }
 
-                if (!pictureJustChanged && user.profilePicturePath != null)
-                    GlideApp.with(this)
-                        .load(StorageUtil.pathToReference(user.profilePicturePath))
-                        .placeholder(R.drawable.image_account)
-                        .into(imageView_profile_picture)
-            }
+    private fun successGetUser(user: User) {
+        if (this@MyAccountFragment.isVisible) {
+
+            editText_name.setText(user.name)
+            editText_bio.setText(user.bio)
+
+            if (!pictureJustChanged && user.profilePicturePath != null)
+                GlideApp.with(this)
+                    .load(StorageUtil.pathToReference(user.profilePicturePath))
+                    .placeholder(R.drawable.image_account)
+                    .into(imageView_profile_picture)
         }
+    }
+
+    private fun failsedLoadUser(e: Exception) {
+        FirebaseAuth.getInstance().signOut()
+        startActivity(intentFor<SignInActivity>().newTask().clearTask())
     }
 }

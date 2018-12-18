@@ -18,21 +18,24 @@ object FirestoreUtil {
     private val firestoreInstance: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
 
     private val currentUserDocRef: DocumentReference
-        get() = firestoreInstance.document("users/${FirebaseAuth.getInstance().currentUser?.uid
-            ?: throw NullPointerException("UID is null.")}")
+        get() = firestoreInstance.document(
+            "users/${FirebaseAuth.getInstance().currentUser?.uid
+                ?: throw NullPointerException("UID is null.")}"
+        )
 
     private val chatChannelsCollectionRef = firestoreInstance.collection("chatChannels")
 
     fun initCurrentUserIfFirstTime(onComplete: () -> Unit) {
         currentUserDocRef.get().addOnSuccessListener { documentSnapshot ->
             if (!documentSnapshot.exists()) {
-                val newUser = User(FirebaseAuth.getInstance().currentUser?.displayName ?: "",
-                    "", null, mutableListOf())
+                val newUser = User(
+                    FirebaseAuth.getInstance().currentUser?.displayName ?: "",
+                    "", null, mutableListOf()
+                )
                 currentUserDocRef.set(newUser).addOnSuccessListener {
                     onComplete()
                 }
-            }
-            else
+            } else
                 onComplete()
         }
     }
@@ -46,10 +49,16 @@ object FirestoreUtil {
         currentUserDocRef.update(userFieldMap)
     }
 
-    fun getCurrentUser(onComplete: (User) -> Unit) {
+    fun getCurrentUser(onComplete: (User) -> Unit, onFailed: (Exception) -> Unit) {
         currentUserDocRef.get()
             .addOnSuccessListener {
-                onComplete(it.toObject(User::class.java)!!)
+                try {
+                    val user = it.toObject(User::class.java)!!
+                    onComplete(user)
+                }
+                catch (e: Exception){
+                    onFailed(e)
+                }
             }
     }
 
@@ -72,8 +81,10 @@ object FirestoreUtil {
 
     fun removeListener(registration: ListenerRegistration) = registration.remove()
 
-    fun getOrCreateChatChannel(otherUserId: String,
-                               onComplete: (channelId: String) -> Unit) {
+    fun getOrCreateChatChannel(
+        otherUserId: String,
+        onComplete: (channelId: String) -> Unit
+    ) {
         currentUserDocRef.collection("engagedChatChannels")
             .document(otherUserId).get().addOnSuccessListener {
                 if (it.exists()) {
@@ -100,8 +111,10 @@ object FirestoreUtil {
             }
     }
 
-    fun addChatMessagesListener(channelId: String, context: Context,
-                                onListen: (List<Item>) -> Unit): ListenerRegistration {
+    fun addChatMessagesListener(
+        channelId: String, context: Context,
+        onListen: (List<Item>) -> Unit
+    ): ListenerRegistration {
         return chatChannelsCollectionRef.document(channelId).collection("messages")
             .orderBy("time")
             .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
@@ -128,7 +141,7 @@ object FirestoreUtil {
             .add(message)
     }
 
-     //region FCM
+    //region FCM
     fun getFCMRegistrationTokens(onComplete: (tokens: MutableList<String>) -> Unit) {
         currentUserDocRef.get().addOnSuccessListener {
             val user = it.toObject(User::class.java)!!
